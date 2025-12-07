@@ -25,6 +25,11 @@ terms_kalman_x = [8.8152290454367233e-002,9.4067674077586172e-001]
 terms_kalman_y = [4.0593364554404232e-001,1.0015856050836085e+000]
 terms_raw_x = [5.6504892746221502e-002,9.5687345521125955e-001]
 terms_raw_y = [2.3873536954904839e-001,1.0351674942325759e+000]
+terms_robot_2_x = [
+     4.2345124139435059e-001,
+     9.6807876472692733e-001,
+    -5.1798196163088398e-005
+]
 
 def regress(x, terms):
   t = 1
@@ -33,6 +38,9 @@ def regress(x, terms):
     r += c * t
     t *= x
   return r
+
+
+
 
 
 
@@ -147,7 +155,7 @@ def print_status(raw_x, raw_y, kal_x, kal_y, regress_x, regress_y, regress_raw_x
 
 def get_robot_pose():
     try:
-        url = "http://10.7.101.167/reeman/pose"
+        url = "http://10.7.101.125/reeman/pose"
         r = requests.get(url, timeout=0.2)
         if r.status_code == 200:
             data = r.json()
@@ -197,6 +205,9 @@ def main():
 
                 regress_x_raw = regress(raw_x, terms_raw_x)
                 regress_y_raw = regress(raw_y, terms_raw_y)
+
+                data_hasiil_regresi = regress(raw_x, terms_robot_2_x)
+                print(data_hasiil_regresi)
                 
                 meas = (raw_x, raw_y)
                 meas_regress = (regress_x_raw, regress_y_raw)

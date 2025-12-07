@@ -239,6 +239,7 @@ def format_tag_block(tag_id, sensor, pos2d_result):
     block_lines.append(bold(tid))
     block_lines.append("")
     if sensor:
+        
         heading = human_heading_from_sensor(sensor)
         block_lines.append(f" IMU:")
         block_lines.append(f"   Accel : {sensor.acceleration.x:7.1f} {sensor.acceleration.y:7.1f} {sensor.acceleration.z:7.1f} (mg)")

@@ -21,7 +21,7 @@ from pypozyx import (
 )
 
 TAG_TARGET = 0x6800
-CSV_FILE   = "position_log.csv"
+CSV_FILE   = "position_log_robot_2.csv"
 LOOP_DT    = 0.25
 
 OFFSET_X = 3325
@@ -120,7 +120,7 @@ def print_status(raw_x, raw_y, fx, fy, heading):
 
 def get_robot_pose():
     try:
-        url = "http://10.7.101.167/reeman/pose"
+        url = "http://10.7.101.125/reeman/pose"
         r = requests.get(url, timeout=0.2)
         if r.status_code == 200:
             data = r.json()
@@ -204,9 +204,10 @@ def main():
                             writer.writerow([
                                 # now,
                                 f"{raw_x * 0.001:.2f}",
+                                f"{fx * 1000:.2f}",
                                 f"{robot_x * 1000:.2f}",
-                                f"-",
                                 f"{raw_y * 0.001:.2f}",
+                                f"{fy * 1000:.2f}",
                                 f"{robot_y * 1000:.2f}",
                             ])
 
